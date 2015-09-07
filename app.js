@@ -6,27 +6,26 @@ var cb;
 	// The service that takes the pictures
 	app.factory('flickr', function($q){
   		return {
-    		getPictures: function(){
-      			var deferred = $q.defer();
- 
-    			cb = function(data) {
+	    		getPictures: function(){
+	      			var deferred = $q.defer();
+	 
+	    			cb = function(data) {
 					deferred.resolve(data.items);
 				};
-
-    			var tags='london';
+	
+	    			var tags='london';
 				var script=document.createElement('script');
 				script.src=
 				'http://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=cb&tags='+tags;
 				document.head.appendChild(script);
 
 				return deferred.promise;
-    		}
+	    		}
   		};
 	});
 
 	app.controller('HomeController', ['$scope', 'flickr', function($scope, flickr) {
 		flickr.getPictures().then(function(pictures) {
-			console.log(pictures);
 
 			pictures.forEach(function(picture) {
 				if(localStorage[picture.media.m]) {
