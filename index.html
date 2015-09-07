@@ -1,0 +1,28 @@
+<!doctypehtml>
+<html ng-app="BestPic">
+	<head>
+		<style type="text/css">
+			img {
+				float:left;
+				margin:15px;
+				cursor: pointer;
+			}
+
+			img.selected {
+				border: 5px solid red;
+				margin:10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>BestPic - test by Angelo Iasevoli</h1>
+		<div ng-controller="HomeController">
+			<div ng-repeat="picture in pictures">
+				<img ng-class="{selected: picture.bestPicFavorite}" ng-src="{{ picture.media.m }}" ng-click="favoriteToggle($index)">
+			</div>
+		</div>
+
+		<script type="text/javascript" src="angular.min.js"></script>
+    	<script type="text/javascript" src="app.js"></script>
+	</body>
+</html>
